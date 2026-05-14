@@ -1,3 +1,10 @@
+// """
+// The count is initialised to 0.
+// When enable is low, count does not change.
+// When enable is high, count increments if up is high and decrements if up is low, wrapping
+// from MAX to 0 on increment and from 0 to MAX on decrement
+// """
+
 `timescale 1ns/1ps
 
 module up_down_counter #(
