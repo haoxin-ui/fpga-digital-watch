@@ -15,7 +15,9 @@ module pwm_generator #(
 );
 
 localparam int CountWidth = $clog2(PERIOD_CYCLES);
+localparam int CompareWidth = CountWidth + 1;
 logic [CountWidth -1:0] count;
+logic [CompareWidth -1:0] compare_count;
 
 mod_n_counter #(
     .N(PERIOD_CYCLES),
@@ -28,6 +30,7 @@ mod_n_counter #(
 );
 
 
-assign pwm_out = (int'(count) < DUTY_CYCLES);
+assign compare_count = {1'b0, count};
+assign pwm_out = (compare_count < CompareWidth'(DUTY_CYCLES));
 
 endmodule

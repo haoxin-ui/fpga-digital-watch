@@ -15,10 +15,10 @@ module user_top_watch_v4 #(
     output logic blank_seconds
 );
 
-  localparam int FLASH_PERIOD = CYCLES_PER_SECOND / 2;
-  localparam int FLASH_HIGH = CYCLES_PER_SECOND / 10;
-  localparam int EDIT_HOLD = CYCLES_PER_SECOND / 2;
-  localparam int EDIT_REPEAT = CYCLES_PER_SECOND / 10;
+  localparam int FLASHPERIOD = CYCLES_PER_SECOND / 2;
+  localparam int FLASHHIGH = CYCLES_PER_SECOND / 10;
+  localparam int EDITHOLD = CYCLES_PER_SECOND / 2;
+  localparam int EDITREPEAT = CYCLES_PER_SECOND / 10;
 
   logic seconds_tick;
   logic clock_divider_run;
@@ -38,8 +38,8 @@ module user_top_watch_v4 #(
   restartable_rate_generator #(
       .CYCLE_COUNT(CYCLES_PER_SECOND)
   ) u_seconds_rate (
-      .clk(clk),
-      .run(clock_divider_run),
+      .clk (clk),
+      .run (clock_divider_run),
       .tick(seconds_tick)
   );
 
@@ -52,8 +52,8 @@ module user_top_watch_v4 #(
   );
 
   pwm_generator #(
-      .PERIOD_CYCLES(FLASH_PERIOD),
-      .DUTY_CYCLES(FLASH_HIGH)
+      .PERIOD_CYCLES(FLASHPERIOD),
+      .DUTY_CYCLES  (FLASHHIGH)
   ) u_flash (
       .clk(clk),
       .rst(mode_enable == 3'b000),
@@ -61,8 +61,8 @@ module user_top_watch_v4 #(
   );
 
   button_auto_repeat #(
-      .HOLD_CYCLES(EDIT_HOLD),
-      .REPEAT_CYCLES(EDIT_REPEAT)
+      .HOLD_CYCLES  (EDITHOLD),
+      .REPEAT_CYCLES(EDITREPEAT)
   ) u_inc_button (
       .clk(clk),
       .button(button[1]),
@@ -70,8 +70,8 @@ module user_top_watch_v4 #(
   );
 
   button_auto_repeat #(
-      .HOLD_CYCLES(EDIT_HOLD),
-      .REPEAT_CYCLES(EDIT_REPEAT)
+      .HOLD_CYCLES  (EDITHOLD),
+      .REPEAT_CYCLES(EDITREPEAT)
   ) u_dec_button (
       .clk(clk),
       .button(button[0]),
