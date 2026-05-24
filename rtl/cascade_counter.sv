@@ -41,13 +41,13 @@ module cascade_counter #(
       count1 <= '0;
       count0 <= '0;
     end else if (enable) begin
-      if (count0 == N0 - 1) begin
+      if (count0 == W0'(N0 - 1)) begin
         count0 <= '0;
 
-        if (count1 == N1 - 1) begin
+        if (count1 == W1'(N1 - 1)) begin
           count1 <= '0;
 
-          if (count2 == N2 - 1) begin
+          if (count2 == W2'(N2 - 1)) begin
             count2 <= '0;
           end else begin
             count2 <= count2 + 1'b1;
